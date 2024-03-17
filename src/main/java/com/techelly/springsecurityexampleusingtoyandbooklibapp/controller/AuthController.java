@@ -40,8 +40,7 @@ import jakarta.validation.Valid;
 @CrossOrigin(origins = { "http://localhost:3002" })
 @RestController
 @RequestMapping("/api/auth")
-public class AuthController {
-	@Autowired
+public class AuthController {	@Autowired
 	AuthenticationManager authenticationManager;
 
 	@Autowired

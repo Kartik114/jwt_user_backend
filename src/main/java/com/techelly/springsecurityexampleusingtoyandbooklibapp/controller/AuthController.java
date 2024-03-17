@@ -137,6 +137,7 @@ public class AuthController {	@Autowired
 							 encoder.encode(signUpRequest.getPassword()));
 		System.out.println(user);
 		Set<String> strRoles = signUpRequest.getRole();
+		System.out.println(strRoles);
 		Set<Role> roles = new HashSet<>();
 
 		if (strRoles == null) {

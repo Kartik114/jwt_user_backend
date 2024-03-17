@@ -99,14 +99,15 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
 		// http.addFilterBefore(authenticationJwtTokenFilter(),
 		// UsernamePasswordAuthenticationFilter.class);
 		http.csrf(AbstractHttpConfigurer::disable)
+				.cors(cors -> {}) // Apply default CORS configuration
 				.authorizeHttpRequests(req -> req.requestMatchers("/api/auth/**").permitAll()
-						.requestMatchers("/api/toyandbooklibapp/**").authenticated()
+						.requestMatchers("/api/toyandbooklibapp/**").permitAll()
 						.anyRequest().authenticated())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authenticationProvider(authenticationProvider())
 				.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class)
 				.logout(logout ->
-						logout.logoutUrl("/api/auth/logout")
+						logout.logoutUrl("/api/auth/logout").permitAll()
 								.addLogoutHandler(logoutHandler)
 								.logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
 				);
